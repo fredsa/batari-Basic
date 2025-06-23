@@ -24,24 +24,18 @@ do
         files="$files $i.$OSTYPE.$ARCH"
     fi
 done
+
+echo "$patchedbB/2600basic.sh"
+if [ -f "$patchedbB/2600basic.sh" ]
+then
+    files="$files 2600basic.sh"
+    cp 2600basic.sh $patchedbB/2600basic.sh
+    sed -i -e 's/\( | bbfilter$EXT\)/ #\1/' $patchedbB/2600basic.sh
+    echo
+    echo "Patched: 2600basic.sh"
+    diff 2600basic.sh $patchedbB/2600basic.sh || true
+fi
+
+echo
+echo "Updated files:"
 (cd $patchedbB; ls -l $files)
-exit
-
-# export bB=/Users/fredsa/.vscode/extensions/chunkypixel.atari-dev-studio-0.10.8/out/bin/compilers/bB/
-# export bB=/Users/fredsa/Documents/chunkypixel.atari-dev-studio-0.10.8-patched/out/bin/compilers/bB/
-
-2600basic
-2600basic.sh
-bbfilter
-install_ux.sh
-makefile
-makefile.linux-x64
-makefile.linux-x86
-makefile.xcmp.osx-x64
-makefile.xcmp.osx-x86
-makefile.xcmp.win-x64
-makefile.xcmp.win-x86
-makepackages.sh
-optimize
-postprocess
-preprocess
